@@ -1,5 +1,10 @@
-.App {
+#root {
+  background: #637281;
+}
+
+.container {
   text-align: center;
+  background: #97afc7;
 }
 
 .App-logo {
@@ -22,5 +27,9 @@
 }
 
 .row {
-  margin-right: 5px;
+  background: #304c68;
+}
+
+.col-sm {
+  background: #304c68;
 }
