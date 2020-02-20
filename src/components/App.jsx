@@ -3,88 +3,148 @@ import "../App.css";
 import Profile from "./Profile";
 import ProfileList from "./ProfileList";
 import eyelogo from "./img/eyelogo.png";
+import PopUp from "./PopUp";
 
 class App extends React.Component {
-  state = { profiles: [] };
-  userGroup = [<Profile name="Jim" age="22" gender="M" />];
+  state = { profiles: [], showPopup: false };
 
-  componentDidMount = () => {
+  constructor(props) {
+    super(props);
+    this.state = { showPopUp: false };
+    console.log(this.props);
+  }
+
+  componentWillMount = () => {
+    //FIND A WAY TO MAKE THIS PERMANENT
+    //Builds a list of Profiles
     let profList = [];
-    for (let i = 0; i < 9; i++) {
-      //profList.push(Individual " + Math.floor(Math.random() * 1000000000));
-      //profList.push(<Profile name={"Individual " + i} age={23} gender={"M"} />);
-      profList.push([{ name: "Individual " + { i }, age: "23", gender: "M" }]);
-    }
+    for (let i = 0; i < 20; i++) {
+      const tempGender = Math.random() >= 0.5; //Generates random Boolean to detemine Gender
+      const tempName = tempGender //Assigns name according to Gender
+        ? this.mNames[Math.round(Math.random() * this.fNames.length)]
+        : this.fNames[Math.round(Math.random() * this.fNames.length)];
+      const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+      profList.push([
+        {
+          key: i,
+          name:
+            tempName +
+            " " +
+            alphabet[Math.floor(Math.random() * alphabet.length)],
+          age: Math.round(Math.random() * 65 + 18), //NOTE: repetitious code. round to demographic ages?
+          gender: tempGender ? "MALE" : "FEMALE"
+        }
+      ]);
+    }
     this.setState({ profiles: profList });
-    console.log(this.state.profiles.toString() + " Y O " + profList.toString());
   };
 
   render() {
     return (
-      <div class="container">
-        <nav class="navbar navbar-expand">
-          <div class="container-fluid">
+      <div className="wrapper">
+        <div className="container">
+          {/* NAV BAR START - CONTAINER NEEDS WORK*/}
+          <nav className="navbar navbar-expand">
             {/* HEADER LOGO */}
-            <div class="navbar-header">
-              <div class="corner-logo">
-                <a class="nav-bar-brand" href="ass">
+            <div className="navbar-header">
+              <div className="corner-logo">
+                <a className="nav-bar-brand" href="ass">
+                  {/* Make Logo Font in Photoshop? */}
                   <h2>MateMatch</h2>
                 </a>
                 <img src={eyelogo} alt="eyeLogoImg"></img>
               </div>
             </div>
-
             {/* HEADER MENU */}
-            <div class="navbar-inner">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="sdasd">
-                    Home <span class="sr-only">(current)</span>
+            <div className="navbar-inner">
+              <ul className="navbar-nav">
+                {/* ABOUT INSERT */}
+                <li className="nav-item active">
+                  <a className="nav-link" href="sds">
+                    About
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="sds">
-                    Link
+                {/* View own profile */}
+                <li className="nav-item">
+                  <a className="nav-link" href="sds">
+                    Profile
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="sesd">
+                {/* Filters for Profile (Expandible) */}
+                <li className="nav-item">
+                  <a className="nav-link" href="sesd">
                     Filters
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="see">
-                    Blackout Zone Mode
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="ass">
-                    Report Infringement
                   </a>
                 </li>
               </ul>
             </div>
-          </div>
-        </nav>
-        <ProfileList users={<Profile name="Jim" age="22" gender="M" />} />
-
-        {/* look for population loop? */}
-
-        {/* <ProfileList users={this.state.profiles} /> */}
-
-        {/* <div class="col-sm"3
-            <Profile />
-          </div>
-          <div class="col-sm"3
-            <Profile />
-          </div>
-          <div class="col-sm"3
-            <Profile />
-          </div> */}
+          </nav>
+        </div>
+        <div className="container-fluid">
+          {/* Import Profile List Component */}
+          <ProfileList users={this.state.profiles} />
+        </div>
       </div>
     );
   }
+
+  //Courteousy of https://randomwordgenerator.com/name.php.
+  mNames = [
+    "Clint",
+    "Thaddeus",
+    "Amos",
+    "Leroy",
+    "Merle",
+    "Irvin",
+    "Mary",
+    "Benton",
+    "Wallace",
+    "Ali",
+    "Coy",
+    "James",
+    "Willard",
+    "Raul",
+    "Aldo",
+    "Reynaldo",
+    "Mathew",
+    "Buford",
+    "Wyatt",
+    "Cruz",
+    "Marcelo",
+    "Vern",
+    "Marcellus",
+    "Howard",
+    "Rod",
+    "Ricky",
+    "Prince",
+    "Sheldon",
+    "Wilmer",
+    "Keneth"
+  ];
+
+  fNames = [
+    "Polly",
+    "Sarah",
+    "Kirsten",
+    "Delia",
+    "Samantha",
+    "Amalia",
+    "Nikki",
+    "Jenny",
+    "Felecia",
+    "Maura",
+    "Katina",
+    "Agnes",
+    "Hope",
+    "Bobbie",
+    "Maricela",
+    "Ashley",
+    "Susanna",
+    "Bernice",
+    "Maribel",
+    "Cheri"
+  ];
 }
 
 export default App;

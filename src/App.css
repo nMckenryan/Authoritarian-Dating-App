@@ -1,10 +1,10 @@
 #root {
-  background: #637281;
+  background-image: linear-gradient(navy, #282c34);
 }
 
 .container {
   text-align: center;
-  background: #97afc7;
+  background: #627180;
 }
 
 .App-logo {
@@ -20,6 +20,11 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.nav-bar-brand {
+  font-family: "Impact", "Charcoal", "sans-serif";
+  font-weight: 700;
 }
 
 .App-link {
