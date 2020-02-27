@@ -1,11 +1,6 @@
 import React from "react";
 import Profile from "./Profile";
-// import PopUp from "./PopUp";
-// import Modal from "react-bootstrap/Modal";
-// import ModalBody from "react-bootstrap/ModalBody";
-// import ModalHeader from "react-bootstrap/ModalHeader";
-// import ModalFooter from "react-bootstrap/ModalFooter";
-// import ModalTitle from "react-bootstrap/ModalTitle";
+import "../ProfileList.css";
 
 const ProfileList = ({ users }) => {
   return (
@@ -13,7 +8,7 @@ const ProfileList = ({ users }) => {
       {users.map((user, key) => {
         //retrieves a bunch of string velues, convert to profile component grid
         return (
-          <div className="col-sm-2">
+          <div id="profileSquare" className="col-sm-3">
             <Profile
               key={key}
               userName={user[0].name}

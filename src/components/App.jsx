@@ -4,9 +4,26 @@ import Profile from "./Profile";
 import ProfileList from "./ProfileList";
 import eyelogo from "./img/eyelogo.png";
 import PopUp from "./PopUp";
+import axios from "axios";
 
 class App extends React.Component {
   state = { profiles: [], showPopup: false };
+
+  // TURNING POP UP ON AND OFF
+  popUpToggle = toggleBool => {
+    this.setState({ showPopUp: toggleBool });
+  };
+
+  activatePopUp = () => {
+    return (
+      <div>
+        <section className="modal-main">
+          <p>DETAILS</p>
+          <button onClick={this.popUpToggle(false)}>Close</button>
+        </section>
+      </div>
+    );
+  };
 
   constructor(props) {
     super(props);
@@ -40,28 +57,51 @@ class App extends React.Component {
     this.setState({ profiles: profList });
   };
 
+  //FETCHEST UNSPLACE API
+  componentDidMount() {
+    axios
+      .get("https://api.unsplash.com/photos/?client_id=" + "Yes")
+      .then(data => {
+        this.setState({ imgs: data.data });
+      })
+      .catch(err => {
+        console.log("Error happened during fetching!", err);
+      });
+  }
+
+  imageFetch = query => {
+    //courteous of https://medium.com/@createdd/2-easy-ways-to-get-data-from-unsplash-com-in-react-b4835e0335fc
+    axios
+      .get(
+        `https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&client_id='${"addIDHere"}`
+      )
+      .then(data => {
+        this.setState({ imgs: data.data.results });
+      })
+      .catch(err => {
+        console.log("Error happened during fetching!", err);
+      });
+  };
+
   render() {
     return (
       <div className="wrapper">
-        <div className="container">
-          {/* NAV BAR START - CONTAINER NEEDS WORK*/}
-          <nav className="navbar navbar-expand">
+        <div className="container-fluid">
+          {/* NAV BAR START */}
+          <nav className="navbar navbar-expand bg-dark justify-content-between">
             {/* HEADER LOGO */}
             <div className="navbar-header">
               <div className="corner-logo">
-                <a className="nav-bar-brand" href="ass">
-                  {/* Make Logo Font in Photoshop? */}
-                  <h2>MateMatch</h2>
-                </a>
                 <img src={eyelogo} alt="eyeLogoImg"></img>
               </div>
             </div>
+
             {/* HEADER MENU */}
-            <div className="navbar-inner">
-              <ul className="navbar-nav">
+            <div id="topBar" className="navbar-inner">
+              <ul className="nav navbar-nav">
                 {/* ABOUT INSERT */}
                 <li className="nav-item active">
-                  <a className="nav-link" href="sds">
+                  <a className="nav-link" onClick={this.activatePopUp}>
                     About
                   </a>
                 </li>
@@ -81,7 +121,7 @@ class App extends React.Component {
             </div>
           </nav>
         </div>
-        <div className="container-fluid">
+        <div className="container">
           {/* Import Profile List Component */}
           <ProfileList users={this.state.profiles} />
         </div>
@@ -113,7 +153,7 @@ class App extends React.Component {
     "Cruz",
     "Marcelo",
     "Vern",
-    "Marcellus",
+    "Marcel",
     "Howard",
     "Rod",
     "Ricky",
@@ -128,7 +168,7 @@ class App extends React.Component {
     "Sarah",
     "Kirsten",
     "Delia",
-    "Samantha",
+    "Sam",
     "Amalia",
     "Nikki",
     "Jenny",
