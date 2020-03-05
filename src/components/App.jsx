@@ -7,7 +7,7 @@ import PopUp from "./PopUp";
 import axios from "axios";
 
 class App extends React.Component {
-  state = { profiles: [], showPopup: false };
+  state = { profiles: [], showPopup: false, images: [] };
 
   // TURNING POP UP ON AND OFF
   popUpToggle = toggleBool => {
@@ -55,32 +55,25 @@ class App extends React.Component {
       ]);
     }
     this.setState({ profiles: profList });
+    this.imageFetch("joe");
   };
 
-  //FETCHEST UNSPLACE API
-  componentDidMount() {
-    axios
-      .get("https://api.unsplash.com/photos/?client_id=" + "Yes")
-      .then(data => {
-        this.setState({ imgs: data.data });
-      })
-      .catch(err => {
-        console.log("Error happened during fetching!", err);
-      });
-  }
+  ImageList = props => {
+    console.log("PRops TEST" + this.props.images);
+    return <img src={this.props.images} />;
+  };
 
-  imageFetch = query => {
-    //courteous of https://medium.com/@createdd/2-easy-ways-to-get-data-from-unsplash-com-in-react-b4835e0335fc
-    axios
-      .get(
-        `https://api.unsplash.com/search/photos/?page=1&per_page=10&query=${query}&client_id='${"addIDHere"}`
-      )
-      .then(data => {
-        this.setState({ imgs: data.data.results });
-      })
-      .catch(err => {
-        console.log("Error happened during fetching!", err);
-      });
+  //FETCHES UNSPLASH  API (FROM https://medium.com/@nabendu82/image-search-app-using-unsplash-api-in-reactjs-3-fa69a67dfa2e)
+  imageFetch = async term => {
+    const response = await axios.get("https://api.unsplash.com/search/photos", {
+      params: { query: term },
+      headers: {
+        Authorization:
+          "Client-ID 10c64e2cab19076618973d6b2e6386a5324262a2e490c990fed2062fa923bb30"
+      }
+    });
+    this.setState({ images: response.data.results });
+    console.log("RESPONSE CHECK " + JSON.stringify(response));
   };
 
   render() {
@@ -92,6 +85,7 @@ class App extends React.Component {
             {/* HEADER LOGO */}
             <div className="navbar-header">
               <div className="corner-logo">
+                {/* <img src={this.state.images} /> */}
                 <img src={eyelogo} alt="eyeLogoImg"></img>
               </div>
             </div>
@@ -123,6 +117,7 @@ class App extends React.Component {
         </div>
         <div className="container">
           {/* Import Profile List Component */}
+          <div>{this.ImageList("TEST SEARCH 4 IMAGE")}</div>
           <ProfileList users={this.state.profiles} />
         </div>
       </div>
