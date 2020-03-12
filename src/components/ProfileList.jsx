@@ -1,24 +1,26 @@
 import React from "react";
 import Profile from "./Profile";
 import "../ProfileList.css";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const ProfileList = ({ users }) => {
   return (
-    <div className="row">
+    <Row>
       {users.map((user, key) => {
         //retrieves a bunch of string velues, convert to profile component grid
         return (
-          <div id="profileSquare" className="col-sm-3">
+          <Col id="profileSquare" sm>
             <Profile
               key={key}
               userName={user[0].name}
               userAge={user[0].age}
               userGender={user[0].gender}
             ></Profile>
-          </div>
+          </Col>
         );
       })}
-    </div>
+    </Row>
   );
 };
 

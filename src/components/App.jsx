@@ -4,7 +4,12 @@ import Profile from "./Profile";
 import ProfileList from "./ProfileList";
 import eyelogo from "./img/eyelogo.png";
 import PopUp from "./PopUp";
+import $ from "jquery";
 import axios from "axios";
+import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import Container from "react-bootstrap/Container";
 
 class App extends React.Component {
   state = { profiles: [], showPopup: false, images: [] };
@@ -14,12 +19,15 @@ class App extends React.Component {
     this.setState({ showPopUp: toggleBool });
   };
 
+  //when done update with React-Bootstrap code
   activatePopUp = () => {
     return (
       <div>
         <section className="modal-main">
           <p>DETAILS</p>
-          <button onClick={this.popUpToggle(false)}>Close</button>
+          <Button variant="primary" onClick={this.popUpToggle(false)}>
+            Close
+          </Button>
         </section>
       </div>
     );
@@ -60,7 +68,7 @@ class App extends React.Component {
 
   ImageList = props => {
     console.log("PRops TEST" + this.props.images);
-    return <img src={this.props.images} />;
+    return <Image src={this.props.images} rounded />;
   };
 
   //FETCHES UNSPLASH  API (FROM https://medium.com/@nabendu82/image-search-app-using-unsplash-api-in-reactjs-3-fa69a67dfa2e)
@@ -79,19 +87,25 @@ class App extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <div className="container-fluid">
-          {/* NAV BAR START */}
+        <Container fluid>
+          {/* NAV BAR START
           <nav className="navbar navbar-expand bg-dark justify-content-between">
             {/* HEADER LOGO */}
-            <div className="navbar-header">
+          {/* <div className="navbar-header">
               <div className="corner-logo">
                 {/* <img src={this.state.images} /> */}
-                <img src={eyelogo} alt="eyeLogoImg"></img>
+          {/* 
               </div>
-            </div>
+            </div> */} */} */}
+          <Navbar bg="dark" variant="dark">
+            <Navbar.Brand href="#home">
+              <Image src={eyelogo} alt="eyeLogoImg" rounded />
+            </Navbar.Brand>
+
+            {/* TO DO: Align this to the right */}
 
             {/* HEADER MENU */}
-            <div id="topBar" className="navbar-inner">
+            <div id="topBar" className="navbar-inner" justify-content-end>
               <ul className="nav navbar-nav">
                 {/* ABOUT INSERT */}
                 <li className="nav-item active">
@@ -113,8 +127,8 @@ class App extends React.Component {
                 </li>
               </ul>
             </div>
-          </nav>
-        </div>
+          </Navbar>
+        </Container>
         <div className="container">
           {/* Import Profile List Component */}
           <div>{this.ImageList("TEST SEARCH 4 IMAGE")}</div>
@@ -127,7 +141,7 @@ class App extends React.Component {
   //Courteousy of https://randomwordgenerator.com/name.php.
   mNames = [
     "Clint",
-    "Thaddeus",
+    "Thad",
     "Amos",
     "Leroy",
     "Merle",
