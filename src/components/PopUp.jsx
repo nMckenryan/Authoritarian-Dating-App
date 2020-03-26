@@ -1,13 +1,31 @@
-// import React from "react";
-// // import "./style.css";
+import React from "react";
+// import "./style.css";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 
-// // https://alligator.io/react/modal-component/ HELPS WITH THIS
+// https://alligator.io/react/modal-component/ HELPS WITH THIS
 
-// class PopUp extends React.Component {
-// //   render() {
-// //     return (
+export class PopUp extends React.Component {
+  render() {
+    return (
+      <Modal.Dialog>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
 
-// //   }
-// // }
+        <Modal.Body>
+          <p>Modal body text goes here.</p>
+        </Modal.Body>
 
-// export default PopUp;
+        <Modal.Footer>
+          <Button variant="secondary" onClick={this.props.onHide}>
+            Close
+          </Button>
+          <Button variant="primary">Save changes</Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    );
+  }
+}
+
+export default PopUp;

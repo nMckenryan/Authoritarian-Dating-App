@@ -16,6 +16,7 @@ const ProfileList = ({ users }) => {
               userName={user[0].name}
               userAge={user[0].age}
               userGender={user[0].gender}
+              userBio={user[0].bio}
             ></Profile>
           </Col>
         );

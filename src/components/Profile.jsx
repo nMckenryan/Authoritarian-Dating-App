@@ -16,7 +16,7 @@ var style = {
   color: "white"
 };
 
-const Profile = ({ key, userName, userAge, userGender }) => {
+const Profile = ({ key, userName, userAge, userGender, userBio }) => {
   return (
     <div className="card .card-img-top" style={style}>
       {/* Profile Picture */}
@@ -38,7 +38,7 @@ const Profile = ({ key, userName, userAge, userGender }) => {
           Profile
         </Accordion.Toggle>
         <Accordion.Collapse eventKey="0">
-          <Card.Body>Hello! I'm the body</Card.Body>
+          <Card.Body>{userBio}</Card.Body>
         </Accordion.Collapse>
       </Accordion>
       {/* Report Button */}
