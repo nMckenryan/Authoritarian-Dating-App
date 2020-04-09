@@ -1,31 +1,35 @@
 import React from "react";
-// import "./style.css";
-import Modal from "react-bootstrap/Modal";
+import "./PopUp.css";
+import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-// https://alligator.io/react/modal-component/ HELPS WITH THIS
+// This handles the popup Modals.
 
-export class PopUp extends React.Component {
-  render() {
-    return (
-      <Modal.Dialog>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
+//https://www.npmjs.com/package/react-responsive-modal
 
-        <Modal.Body>
-          <p>Modal body text goes here.</p>
-        </Modal.Body>
+const PopUp = (props) => {
+  return (
+    <Form>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control type="email" placeholder="Enter email" />
+        <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text>
+      </Form.Group>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.onHide}>
-            Close
-          </Button>
-          <Button variant="primary">Save changes</Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-    );
-  }
-}
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" placeholder="Password" />
+      </Form.Group>
+      <Form.Group controlId="formBasicCheckbox">
+        <Form.Check type="checkbox" label="Check me out" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+  );
+};
 
 export default PopUp;

@@ -1,0 +1,64 @@
+$mainGrey: #304c68;
+
+#root {
+  background-image: linear-gradient($mainGrey, black);
+
+  #topBar {
+    position: right;
+  }
+
+  .nav-bar-brand {
+    font-family: "Impact", "Charcoal", "sans-serif";
+    font-weight: 700;
+  }
+}
+
+.container-fluid {
+  text-align: center;
+  background: #343a40; //fills in the gap in the navbar
+
+  .col-sm {
+    background: #282c34;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+ul {
+  position: right;
+  top: 0;
+  width: 100%;
+
+  li {
+    border: 1px solid black;
+    background-color: #f3f3f3bd;
+
+    li a:hover {
+      background-color: #304c68;
+      color: white;
+    }
+  }
+}
+
+.App {
+  .App-logo {
+    height: 40vmin;
+  }
+
+  .App-header {
+    background-color: $mainGrey;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+
+  .App-link {
+    color: #09d3ac;
+  }
+}

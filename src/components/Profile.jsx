@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import pic from "./profPic.png";
+import Avatar from "react-avatar";
+import AvatarGenerator from "react-avatar-generator";
 import Accordion from "react-bootstrap/Accordion";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Card from "react-bootstrap/Card";
@@ -13,16 +15,22 @@ var style = {
   border: "1px solid #cecece",
   width: "220px",
   background: "#293036",
-  color: "white"
+  color: "white",
 };
 
 const Profile = ({ key, userName, userAge, userGender, userBio }) => {
   return (
     <div className="card .card-img-top" style={style}>
       {/* Profile Picture */}
-
-      <Image src={pic} alt="profPic" thumbnail />
-
+      {/* Generates Avatar Picture, Courteousy of: https://www.npmjs.com/package/react-avatar-generator */}
+      <AvatarGenerator
+        colors={["blue", "yellow", "pink", "purple"]}
+        shape="triangle"
+        backgroundColor="#e3e3e3"
+        width="145"
+        height="150"
+        sizing="10"
+      />
       {/* UserName column (with User Age) */}
       <h1>{userName}</h1>
       <h5>
