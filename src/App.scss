@@ -13,17 +13,32 @@ $mainGrey: #304c68;
   }
 }
 
-.container-fluid {
+.form-group {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.form-check {
+  padding-top: 0.4rem;
+}
+.container {
+  color: white;
+  height: 1000px;
+}
+
+.jumbotron {
+  background-color: #007bff !important;
+  text-align: center;
+  padding: 1rem 1rem !important;
+}
+
+.ProfileList {
   text-align: center;
   background: #343a40; //fills in the gap in the navbar
+}
 
-  .col-sm {
-    background: #282c34;
-  }
-
-  .btn {
-    width: 100%;
-  }
+.btn {
+  width: 100%;
 }
 
 ul {
@@ -40,6 +55,19 @@ ul {
       color: white;
     }
   }
+}
+
+.carousel-caption {
+  vertical-align: center;
+  line-height: 42.953px;
+}
+
+.profileCard {
+  background-color: pink;
+}
+
+.carousel-caption {
+  padding: 0 !important;
 }
 
 .App {

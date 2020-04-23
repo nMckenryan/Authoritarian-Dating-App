@@ -5,13 +5,18 @@ import ProfileList from "./ProfileList";
 import eyelogo from "./img/eyelogo.png";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
-import PopUp from "./PopUp";
-import SignUp from "./SignUp";
+import SignUpPage from "./SignUpPage";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container";
 import { Helmet } from "react-helmet";
+import InitPopUp from "./InitPopUp";
+import Button from "react-bootstrap/Button";
+import Ticker from "react-ticker";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import carobackground from "./img/carouselblock.png";
+import NavbarCollapse from "react-bootstrap/NavbarCollapse";
 
 class App extends React.Component {
   state = { profiles: [], images: [], showPopUp: false };
@@ -49,7 +54,7 @@ class App extends React.Component {
 
     //Builds a list of Profiles
     let profList = [];
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 23; i++) {
       const tempGender = Math.random() >= 0.5; //Generates random Boolean to detemine Gender
       const tempName = tempGender //Assigns name according to Gender
         ? this.mNames[this.slct(this.fNames.length)]
@@ -77,25 +82,34 @@ class App extends React.Component {
   render() {
     const { open } = this.state;
     return (
-      <div className="wrapper">
+      <Container fluid>
         <Helmet>
           <title>MateMatch - Partner Finding for Citizens of the Regime</title>
         </Helmet>
-
-        <Container fluid>
+        <Router>
+          {/* Start of Nav Bar */}
           <Navbar bg="dark" variant="dark">
             <Navbar.Brand href="#home">
-              <Image src={eyelogo} alt="eyeLogoImg" rounded />
+              <Link to="/home">
+                <Image src={eyelogo} alt="eyeLogoImg" to="/home" rounded />
+              </Link>
             </Navbar.Brand>
 
             {/* HEADER MENU */}
             <Nav id="topBar" className="ml-auto">
+              {/* CAROUSEL OF ADMIN MESSAGES */}
               {/* ABOUT INSERT */}
               <Nav.Link onClick={this.openPopUp}>About</Nav.Link>
               {/* View own profile TODO: Set as first profile with Gear?*/}
-              <Nav.Link href="profile">Profile</Nav.Link>
+
+              <Nav.Link href="profile" to="/home">
+                <Link to="/home">Profile</Link>
+              </Nav.Link>
+
               {/* Filters for Profile (Expandible) */}
-              <Nav.Link href="filter">Filters</Nav.Link>
+              <Nav.Link href="filter" to="/signUpPage">
+                <Link to="/signUpPage">Filters</Link>
+              </Nav.Link>
             </Nav>
           </Navbar>
           {this.state.showPopUp ? (
@@ -107,11 +121,23 @@ class App extends React.Component {
           </PopUp> */}
 
           <Modal open={open} onClose={this.closePopUp}>
-            <SignUp></SignUp>
+            <InitPopUp></InitPopUp>
+            <Link to="/signUpPage" onClose={this.closePopUp}>
+              <Button>Continue</Button>
+            </Link>
           </Modal>
-          <ProfileList users={this.state.profiles} />
-        </Container>
-      </div>
+
+          {/* ROUTER OUTPUT GOES HERE */}
+
+          {/* TODO: Fix the Styling */}
+          <Switch>
+            <Route path="/home">
+              <ProfileList users={this.state.profiles} />
+            </Route>
+            <Route path="/signUpPage" component={SignUpPage} />
+          </Switch>
+        </Router>
+      </Container>
     );
   }
 
